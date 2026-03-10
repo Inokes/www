@@ -1,0 +1,226 @@
+@font-face {
+  font-family: 'sn pro';
+  src: url('fonts/SNPro/SNPro-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sn pro';
+  src: url('fonts/SNPro/SNPro-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sn pro';
+  src: url('fonts/SNPro/SNPro-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'firacode nerd';
+  src: url('fonts/firacode/FiraCodeNerdFont-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0b0b12;
+  --panel: rgba(23, 23, 36, 0.75);
+  --surface: rgba(31, 31, 46, 0.75);
+
+  --accent: #f6685a;
+
+  --text: #e6e6f0;
+  --muted: #9a9aad;
+}
+
+body.light {
+  --bg: #f6f6f9;
+  --panel: rgba(255, 255, 255, 0.75);
+  --surface: rgba(240, 240, 245, 0.75);
+
+  --text: #222;
+  --muted: #666;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+
+  font-family: 'sn pro', system-ui, sans-serif;
+
+  overflow: hidden;
+
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+.icon,
+code,
+pre {
+  font-family: 'firacode nerd', monospace;
+}
+
+.fade {
+  animation: fadein 1s ease;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bg {
+  position: fixed;
+
+  width: 110%;
+  height: 110%;
+
+  object-fit: cover;
+
+  opacity: 0.35;
+
+  animation: bgfloat 18s linear infinite alternate;
+
+  z-index: -1;
+}
+
+@keyframes bgfloat {
+  0% {
+    transform: translate(-2%, -2%);
+  }
+  100% {
+    transform: translate(2%, 2%);
+  }
+}
+
+#panel {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 420px;
+
+  background: var(--panel);
+
+  padding: 32px;
+
+  border-radius: 10px;
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+  transition:
+    transform 1s,
+    left 1s;
+}
+
+body.loaded #panel {
+  left: 22%;
+}
+
+.profile {
+  text-align: center;
+
+  margin-bottom: 28px;
+}
+
+.avatar {
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  margin-bottom: 14px;
+
+  border: 3px solid var(--accent);
+}
+
+.profile h1 {
+  font-size: 46px;
+  font-weight: 600;
+}
+
+.profile p {
+  color: var(--muted);
+}
+
+.selector {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+
+  gap: 42px;
+
+  background: var(--surface);
+
+  padding: 18px 34px;
+
+  border-radius: 10px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.btn {
+  width: 60px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0.45;
+
+  transition:
+    opacity 0.25s,
+    transform 0.25s,
+    filter 0.25s;
+}
+
+.btn.selected {
+  opacity: 1;
+
+  transform: scale(1.15);
+
+  filter: drop-shadow(0 0 12px var(--accent));
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+}
+
+body.light .icon.dark {
+  display: none;
+}
+
+body:not(.light) .icon.light {
+  display: none;
+}
