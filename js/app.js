@@ -1,32 +1,59 @@
-const buttons = [...document.querySelectorAll('.btn')];
+const buttons=[...document.querySelectorAll(".btn")]
 
-let index = 0;
+let index=0
 
-function update() {
-  buttons.forEach((b, i) => {
-    b.classList.toggle('selected', i === index);
-  });
+const routes={
+github:"https://github.pxvault.site",
+blog:"https://blog.pxvault.site",
+file:"https://files.pxvault.site"
 }
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight') {
-    index = (index + 1) % buttons.length;
-    update();
-  }
+function update(){
 
-  if (e.key === 'ArrowLeft') {
-    index = (index - 1 + buttons.length) % buttons.length;
-    update();
-  }
+buttons.forEach((b,i)=>{
+b.classList.toggle("selected",i===index)
+})
 
-  if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
-    const id = buttons[index].dataset.id;
-    console.log('open:', id);
-  }
+}
 
-  if (e.key === 't') {
-    document.body.classList.toggle('light');
-  }
-});
+function openSelected(){
 
-window.addEventListener('load', update);
+const id=buttons[index].dataset.id
+
+if(routes[id]){
+window.location.href=routes[id]
+}
+
+}
+
+document.addEventListener("keydown",e=>{
+
+if(e.key==="ArrowRight"){
+
+index=(index+1)%buttons.length
+update()
+
+}
+
+if(e.key==="ArrowLeft"){
+
+index=(index-1+buttons.length)%buttons.length
+update()
+
+}
+
+if(e.key==="Enter"||e.key===" "||e.key==="ArrowDown"){
+
+openSelected()
+
+}
+
+if(e.key==="t"){
+
+document.body.classList.toggle("light")
+
+}
+
+})
+
+window.addEventListener("load",update)
